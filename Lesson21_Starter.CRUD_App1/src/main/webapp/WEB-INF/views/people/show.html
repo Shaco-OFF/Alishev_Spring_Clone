@@ -5,8 +5,17 @@
     <title>Person</title>
 </head>
 <body>
-    <p th:text="${person.getId()}">VALUE</p>
-    <p th:text="${person.getName()}">VALUE</p>
+    <p th:text="'Person ID: ' + ${person.getId()}">VALUE</p>
 
+
+    <p th:text="'Person name: ' + ${person.getName()}">VALUE</p>
+
+    <p th:text="'Person surname: ' + ${person.getSurname()}">VALUE</p>
+
+    <p th:text="'Person age: ' + ${person.getAge()}">VALUE</p>
+
+    <label for="parent">Person parent: </label>
+    <a th:href="@{/people/{id}(id=${person.getParent().getId()})}"
+       th:text="${person.getParent().getName()}" id="parent">parent</a>
 </body>
 </html>

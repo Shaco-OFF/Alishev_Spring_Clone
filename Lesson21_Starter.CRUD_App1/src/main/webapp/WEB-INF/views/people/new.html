@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Person</title>
+</head>
+<body>
+
+<!--Указываем 3 атрибута:
+    1)тип метода (GET, POST...) th:method="POST"
+    2)URL, на который эта форма будет посылать данные th:action="@{/URL}"
+    3)объект, который передали в модель-->
+<!--Создание формы-->
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <!--Создание лейбла (название на странице) для поля, где for указывет на соответсвующий id ПОЛЯ из input-->
+
+    <!--Назначение поля для передаваемого объекта (тип и имя поля). id="name" присваивания id для текущего input-->
+    <label>
+        <input type="text" th:field="*{name}" placeholder="Person name">
+    </label>
+    <br> <!--пустая строка-->
+    <label>
+        <input type="text" th:field="*{surname}" placeholder="Person surname">
+    </label>
+    <br> <!--пустая строка-->
+    <label>
+        <input type="number" th:field="*{age}" placeholder="Person age">
+    </label>
+    <br> <!--пустая строка-->
+    <label>
+        <div th:each="person : ${people}">
+            <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+        </div>
+        <input type="text" th:field="*{parent.getName}" placeholder="Person parent">
+    </label>
+    <br> <!--пустая строка-->
+    <input type="submit" value="Create!"/> <!--создание кнопки (тип submit)-->
+</form>
+
+</body>
+</html>

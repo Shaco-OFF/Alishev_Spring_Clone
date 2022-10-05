@@ -3,11 +3,9 @@ package ru.alishev.springcourse.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.PersonDAO;
+import ru.alishev.springcourse.models.Person;
 
 @Controller
 @RequestMapping("/people")
@@ -31,8 +29,26 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        //Получим одногочеловека по его id из DAO и передадим на отображение в представление (view)
+        //Получим одного человека по его id из DAO и передадим на отображение в представление (view)
         model.addAttribute("person", personDAO.show(id));
         return "people/show";
+    }
+
+    //Запрос HTML формы для создания нового человека
+    @GetMapping("/new")
+    public String newPerson(Model model) {
+        //передаем модели пустой объект класса Person с значениями полей по умолчанию
+        model.addAttribute("person", new Person());
+        return "people/new";
+    }
+
+    //Создание человека и добавление его в БД
+    @PostMapping
+    public String create(@ModelAttribute("person") Person person) {
+        //добавление в БД с помощью паттерна DAO
+        personDAO.save(person);
+        //механизм редирект (указание к переходу на другую страницу). В данном случае после добавления человека в БД (List<Person>)
+        //указание к переходу на страницу со списком людей
+        return "redirect:/people";
     }
 }
