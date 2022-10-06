@@ -35,6 +35,7 @@ public class PeopleController {
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
+        //Добавление пустого объекта Person в модель через аннотацию @ModelAttribute("person")
         return "people/new";
     }
 
