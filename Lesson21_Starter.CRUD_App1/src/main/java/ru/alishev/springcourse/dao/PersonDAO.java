@@ -41,6 +41,11 @@ public class PersonDAO {
     public void save(Person person) {
         //При создании новой сущности такие поля, как id должны присваиваться автоматически, а не вводиться пользователем
         person.setId(++PEOPLE_COUNT);
+        Person parent = people.stream()
+                .filter(x -> x.getName().equals(person.getParentName()))
+                .findAny()
+                .orElse(new Person("No person data"));
+        person.setParent(parent);
         people.add(person);
     }
 }

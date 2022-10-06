@@ -28,10 +28,7 @@
     </label>
     <br> <!--пустая строка-->
     <label>
-        <div th:each="person : ${people}">
-            <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
-        </div>
-        <input type="text" th:field="*{parent.getName}" placeholder="Person parent">
+        <input type="text" th:field="*{parentName}" placeholder="Person parent">
     </label>
     <br> <!--пустая строка-->
     <input type="submit" value="Create!"/> <!--создание кнопки (тип submit)-->

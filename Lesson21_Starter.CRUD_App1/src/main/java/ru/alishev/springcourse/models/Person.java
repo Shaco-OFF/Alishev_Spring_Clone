@@ -7,6 +7,15 @@ public class Person {
     private int age;
     public Person parent;
     private String status;
+    private String parentName;
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
 
     public Person() {
     }
