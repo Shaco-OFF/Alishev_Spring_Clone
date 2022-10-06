@@ -36,9 +36,11 @@ public class PeopleController {
 
     //Запрос HTML формы для создания нового человека
     @GetMapping("/new")
-    public String newPerson(Model model) {
+    public String newPerson(@ModelAttribute("person") Person person) {
         //передаем модели пустой объект класса Person с значениями полей по умолчанию
-        model.addAttribute("person", new Person());
+        //Это можно сделать с помощью аннотации @ModelAttribute("person") Person person или через добавление в аргумент
+        //метода Model model и вызове метода model.addAttribute("person", new Person());
+
         return "people/new";
     }
 
