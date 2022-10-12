@@ -7,8 +7,15 @@
 <body>
 
 <div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+    <!--Указывается ссылка на @{/people/{id}, куда подставляется id из объекта Person, хранящегося в МОДЕЛИ
+    в VALUE подставляется текст из th:text="${person.getName()}", который ссылается на имя объекта из МОДЕЛИ-->
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="${person.getName() + ' , ' + person.getAge()}">user</a>
 </div>
+<br/> <!--пустая строка-->
+<hr/> <!--отступ-->
+
+<a href="/people/new">Create new person</a>
 
 </body>
 </html>

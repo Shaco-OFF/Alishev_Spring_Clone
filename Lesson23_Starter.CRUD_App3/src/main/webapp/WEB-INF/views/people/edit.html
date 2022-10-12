@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update person</title>
+</head>
+<body>
+<!--В Thymeleaf есть методы PATCH DELETE PUT, в них неявно происходит подстановка скрытого поля в фильтре и изменение
+  типа запроса-->
+<!--Указываем 3 атрибута:
+    1)тип метода (GET, POST...) th:method="POST"
+    2)URL, на который эта форма будет посылать данные th:action="@{/URL}"
+    3)объект, который передали в модель
+    Сначала проводится GET запрос по адресу people/{id}/edit, в методе контроллера по данному запросу в МОДЕЛЬ передается
+    объект Person для дальнейшей обработки формы для POST/PATCH запроса-->
+<!--Создание формы-->
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+  <br/>
+  <label for="age">Enter age: </label>
+  <input type="text" th:field="*{age}" id="age"/>
+  <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+  <br/>
+  <label for="email">Enter e-mail: </label>
+  <input type="text" th:field="*{email}" id="email"/>
+  <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

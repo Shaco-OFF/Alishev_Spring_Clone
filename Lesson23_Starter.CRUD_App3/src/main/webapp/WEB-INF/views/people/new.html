@@ -6,9 +6,23 @@
 </head>
 <body>
 
+<!--При переходе на URL "people/new" в контроллере передается соответствующий GET запрос, по нему в МОДЕЛЬ передается
+    пустой объект Person th:object="${person}" (нужен пустой конструктор), после чего через форму POST запроса добавляются
+    поля объекта в модели и отсылается на указанный URL th:action="@{/people}"-->
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
+    <!--th:if="${#fields} - доступ к полям объекта. hasErrors() - метод проверки полей на ошибки валидации
+        th:errors="*{name}" вывод сообщения об ошибке (текст из аннотации для поля)-->
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    <br/>
+    <label for="email">Enter e-mail: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
     <br/>
     <input type="submit" value="Create!"/>
 </form>
